@@ -11,7 +11,7 @@ export default function AppTemplate({ wantFull, className = "", children }) {
   }
   return (
     <main className={"w-full " + className}>
-      <div className="w-full flex justify-center px-2 md:px-20">
+      <div className="w-full flex justify-center px-3">
         <div className="max-w-screen-xl w-full">{children}</div>
       </div>
     </main>
