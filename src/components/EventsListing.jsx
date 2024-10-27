@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import SectionHeader from "./SectionHeader";
@@ -10,6 +10,7 @@ export default function EventsListing() {
   const [isSortByOpen, setIsSortByOpen] = useState(false);
   const [sortBy, setSortBy] = useState("Date");
   const [activeFilter, setActiveFilter] = useState(null);
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   const handleSortByOpen = () => {
     setIsSortByOpen(!isSortByOpen);
@@ -17,13 +18,35 @@ export default function EventsListing() {
   };
 
   const handleFilterClick = (filter) => {
-    setActiveFilter(filter.id === activeFilter ? null : filter.id);
+    setActiveFilter(
+      filter.name.toLowerCase() === activeFilter
+        ? null
+        : filter.name.toLowerCase()
+    );
   };
 
-  const filteredEvents = events.filter((event) => {
-    if (!activeFilter) return true;
-    return event.categoryId === activeFilter;
-  });
+  useEffect(() => {
+    const filteredEvents = events.filter((event) => {
+      if (!activeFilter) return true;
+      return event.tags.includes(activeFilter);
+    });
+
+    if (sortBy === "Date") {
+      filteredEvents.sort((a, b) => {
+        return new Date(a.dateOfEvent) - new Date(b.dateOfEvent);
+      });
+    } else if (sortBy === "Price") {
+      filteredEvents.sort((a, b) => {
+        return a.price - b.price;
+      });
+    } else if (sortBy === "Popularity") {
+      filteredEvents.sort((a, b) => {
+        return b.popularity - a.popularity;
+      });
+    }
+
+    setFilteredEvents(filteredEvents);
+  }, [activeFilter, sortBy]);
 
   return (
     <section className="flex flex-col gap-5">
@@ -33,8 +56,8 @@ export default function EventsListing() {
         <button
           onClick={handleSortByOpen}
           className={
-            "min-w-max py-2 px-4 text-sm md:text-lg text-zinc-300 bg-zinc-800 rounded-full flex justify-center items-center gap-2 relative " +
-            (isSortByOpen ? "bg-rose-700" : "")
+            "min-w-max py-2 px-4 text-sm md:text-lg text-zinc-300 rounded-full flex justify-center items-center gap-2 relative " +
+            (isSortByOpen ? "bg-rose-700" : "bg-zinc-800 ")
           }
         >
           <Icon name="discover_tune" className="text-lg md:text-xl" />
@@ -69,8 +92,8 @@ export default function EventsListing() {
                     borderRight: index === sortyByOptions.length - 1 && "none",
                   }}
                   className={
-                    "min-w-max py-2 px-4 text-sm md:text-lg text-zinc-300 bg-zinc-800 border-r border-zinc-700 flex justify-center items-center gap-2 relative " +
-                    (option === sortBy ? "bg-rose-700" : "")
+                    "min-w-max py-2 px-4 text-sm md:text-lg text-zinc-300  border-r border-zinc-700 flex justify-center items-center gap-2 relative " +
+                    (option === sortBy ? "bg-rose-700" : "bg-zinc-800")
                   }
                 >
                   {option}
@@ -88,8 +111,11 @@ export default function EventsListing() {
             key={filter.id}
             onClick={() => handleFilterClick(filter)}
             style={{
-              backgroundColor: activeFilter === filter.id && filter.bgColor,
-              borderColor: activeFilter === filter.id && filter.borderColor,
+              backgroundColor:
+                filter.name.toLowerCase() === activeFilter && filter.bgColor,
+              borderColor:
+                filter.name.toLowerCase() === activeFilter &&
+                filter.borderColor,
             }}
             className={`min-w-max py-2 px-4 text-sm md:text-lg text-zinc-300 bg-zinc-800 rounded-full flex justify-center items-center gap-2 relative `}
           >
@@ -100,9 +126,15 @@ export default function EventsListing() {
       </div>
       {/* Event Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filteredEvents.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
+        {filteredEvents && filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))
+        ) : (
+          <div>
+            <h1 className="text-zinc-300 text-lg">No events found</h1>
+          </div>
+        )}
       </div>
     </section>
   );

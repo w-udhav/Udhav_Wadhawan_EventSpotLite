@@ -10,14 +10,14 @@ export const events = [
     dateOfEvent: "2024-12-12",
     timeOfEvent: "7:00 PM - 10:00 PM",
     location: "Delhi NCR",
-    price: "₹5999",
+    price: 5999,
     isAvailable: true,
     status: "Available",
-    tags: ["Music", "Rock", "Concert"],
+    tags: ["music", "rock", "concert"],
+    popularity: 5,
     about:
       "Get ready to experience the International rock legend's live concert as part of his 6 City India Tour! The legendary Bryan Adams is set to storm Indian arenas once again, and this time, he's bringing not just a concert, but a full-fledged electrifying musical journey through his unparalleled career with the ‘So Happy It Hurts’ World Tour. Bryan Adams' music has a timeless quality that resonates with fans of all ages. His ability to craft songs that blend heartfelt lyrics with memorable melodies has made him a beloved figure in the world of rock music.",
   },
-
   {
     id: 2,
     title: "Halloween Special - Twilight at Taste Cinemas",
@@ -27,15 +27,19 @@ export const events = [
     video: "",
     dateOfEvent: "2024-11-24",
     timeOfEvent: "7:00 PM - 9:30 PM",
+    tags: ["food", "cinema", "halloween"],
     venue:
       "PHD House, 4/2, August Kranti Marg, Siri Institutional Area, Block A, Nipccd Campus, Hauz Khas, New Delhi, Delhi 110016",
     status: "Tickets coming soon",
+    price: 1999,
+    isAvailable: false,
+    popularity: 4,
     about:
       "Welcome to Taste Cinemas, India’s first Cinematic Immersive Dining Experience, where you eat what you watch! This Halloween, immerse yourself in a 9-course menu inspired by Edward & Bella’s captivating love story in Twilight. Indulge in delightful dishes, from blood shots to edible baseballs, each crafted to enhance your sensory adventure. Join us for a unique evening that unforgettably blends cinema and cuisine!  ",
   },
 ];
 
-export const sortyByOptions = ["Date", "Price", "Location"];
+export const sortyByOptions = ["Date", "Price", "Popularity"];
 
 export const filters = [
   {

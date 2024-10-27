@@ -14,7 +14,7 @@ function App() {
 
       <HeroSection />
 
-      <AppTemplate className="mt-20">
+      <AppTemplate className="mt-10 md:mt-20">
         <div className="flex flex-col gap-20">
           <section className="">
             <SectionHeader title="For You" />

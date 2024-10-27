@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { glassmorph } from "../utils/constants";
 import Icon from "./Icon";
 
 export default function EventCard({ event = {} }) {
@@ -25,6 +24,8 @@ export default function EventCard({ event = {} }) {
         muted
         playsInline
         controls={false}
+        disablePictureInPicture
+        controlsList="nodownload"
       ></video>
 
       {event?.video && (

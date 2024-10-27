@@ -3,10 +3,11 @@ import { glassmorph } from "../utils/constants";
 
 export default function Navbar() {
   return (
-    <div className="mb-16">
+    <div className="md:mb-16">
       <nav
         className={
-          "fixed top-0 z-20 w-full py-3 flex justify-center " + glassmorph
+          "fixed top-0 z-20 w-full py-3 flex justify-center px-5 md:px-0 " +
+          glassmorph
         }
       >
         <div className="max-w-screen-xl w-full flex justify-between items-center z-20">
