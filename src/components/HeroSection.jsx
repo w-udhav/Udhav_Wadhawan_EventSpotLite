@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+
 import AppTemplate from "./layouts/AppTemplate";
 import diljit from "../assets/diljit/posterVid.mp4";
 
@@ -10,16 +12,35 @@ export default function HeroSection() {
         <div className="w-full h-full absolute top-0 left-0 bg-black/10" />
         <div className="w-full h-[60%] absolute bottom-0 left-0 bg-gradient-to-b from-transparent to-black" />
         <div className="w-full h-full absolute top-0 left-0" />
+
+        <AppTemplate className="w-full absolute top-0 left-0 right-0 flex items-end pt-20 md:pt-10 z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="w-full flex flex-col items-start"
+          >
+            <h1 className="text-textWhite/60 font-bold text-5xl md:text-7xl">
+              Your City, Your Stage
+            </h1>
+          </motion.div>
+        </AppTemplate>
+
         {/* Overlay - Bottom Text */}
         <AppTemplate className="w-full absolute top-0 left-0 bottom-0 right-0 flex items-end pb-10 z-10">
-          <div className="w-full flex flex-col items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="w-full flex flex-col items-start"
+          >
             <h3 className="font-semibold text-xl md:text-2xl text-zinc-400/70">
               Most Popular
             </h3>
             <h1 className="text-textWhite/60 font-bold text-3xl md:text-5xl">
               Diljit Dosanjh
             </h1>
-          </div>
+          </motion.div>
         </AppTemplate>
         <div className="w-full h-full absolute top-0 right-0"></div>
         <video

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 
 import SectionHeader from "./SectionHeader";
 import Icon from "./Icon";
@@ -63,11 +63,19 @@ export default function EventsListing() {
     document.body.style.overflow = "auto";
   };
 
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
     <section className="flex flex-col gap-5">
       <SectionHeader title="Explore Local Events" />
       {/* Filters */}
-      <div className="flex gap-3 overflow-x-auto hide-scrollbar pb-3">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, delay: 1.4 }}
+        className="flex gap-3 overflow-x-auto hide-scrollbar pb-3"
+      >
         <button
           onClick={handleSortByOpen}
           className={
@@ -138,9 +146,15 @@ export default function EventsListing() {
             <span>{filter.name}</span>
           </button>
         ))}
-      </div>
+      </motion.div>
       {/* Event Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20, delay: 1.6 }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        style={{ willChange: "opacity, transform" }}
+      >
         {filteredEvents && filteredEvents.length > 0 ? (
           filteredEvents.map((event) => (
             <motion.button
@@ -157,11 +171,11 @@ export default function EventsListing() {
             <h1 className="text-zinc-300 text-lg">No events found</h1>
           </div>
         )}
-      </div>
+      </motion.div>
       {/* Modal */}
       <AnimatePresence>
         {selectedEvent && (
-          <>
+          <div className="z-50">
             {/* Background Blur */}
             <motion.div
               className="fixed inset-0 bg-black/50 backdrop-blur-xl z-10"
@@ -175,7 +189,7 @@ export default function EventsListing() {
             {/* Zoomed Card */}
             <motion.div
               layoutId={selectedEvent.id}
-              className="fixed top-0 left-0 right-0 mx-auto w-full max-w-md p-5 overflow-y-auto max-h-[100dvh] hide-scrollbar rounded-lg shadow-lg z-[999]"
+              className="fixed top-0 left-0 right-0 mx-auto w-full max-w-md p-5 overflow-y-auto max-h-[100dvh] hide-scrollbar rounded-lg shadow-lg z-20"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -294,7 +308,7 @@ export default function EventsListing() {
 
               {/* Information Container */}
             </motion.div>
-          </>
+          </div>
         )}
       </AnimatePresence>
     </section>
