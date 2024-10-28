@@ -5,7 +5,7 @@ import diljit from "../assets/diljit/posterVid.mp4";
 export default function HeroSection() {
   return (
     <AppTemplate wantFull={true} className="max-w-screen-2xl mx-auto ">
-      <div className="w-full md:rounded-3xl h-[75dvh] md:h-full md:max-h-[75vh] overflow-hidden relative shadow-sm">
+      <div className="w-full md:rounded-3xl h-[75svh] md:h-full md:max-h-[75vh] overflow-hidden relative shadow-sm">
         {/* Overlay - Black background */}
         <div className="w-full h-full absolute top-0 left-0 bg-black/10" />
         <div className="w-full h-[60%] absolute bottom-0 left-0 bg-gradient-to-b from-transparent to-black" />

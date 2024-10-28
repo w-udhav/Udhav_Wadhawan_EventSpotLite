@@ -6,7 +6,7 @@ export default function Navbar() {
     <div className="md:mb-16">
       <nav
         className={
-          "fixed top-0 z-20 w-full py-3 flex justify-center px-5 md:px-0 " +
+          "fixed top-0 w-full py-3 flex justify-center px-3 md:px-0 " +
           glassmorph
         }
       >

@@ -37,6 +37,64 @@ export const events = [
     about:
       "Welcome to Taste Cinemas, India’s first Cinematic Immersive Dining Experience, where you eat what you watch! This Halloween, immerse yourself in a 9-course menu inspired by Edward & Bella’s captivating love story in Twilight. Indulge in delightful dishes, from blood shots to edible baseballs, each crafted to enhance your sensory adventure. Join us for a unique evening that unforgettably blends cinema and cuisine!  ",
   },
+  {
+    id: 3,
+    title: "Echoes Prelude",
+    tagline: "Echoes of Tomorrow",
+    poster:
+      "https://b.zmtcdn.com/data/zomaland/c57bbac06d0588070c0067b05f5390f71725640131.png",
+    video:
+      "https://b.zmtcdn.com/data/file_assets/9b46fe9ba26280b7795954177904d5ed1728282597.mp4",
+    dateOfEvent: "2024-12-27",
+    timeOfEvent: "7:30 PM - 5:00 AM",
+    tags: ["music", "concert", "electronic"],
+    venue: "Westend Marg, Saidulajab, Saiyad ul Ajaib, Saket, New Delhi",
+    status: "Available",
+    price: 999,
+    isAvailable: true,
+    popularity: 6,
+    about:
+      "Step into a world where magic meets music. 🌟✨Echoes Prelude is bringing an otherworldly experience to your city, blending futuristic beats with mystical visuals. Get ready to lose yourself in the neon-lit jungles and ethereal sounds of Echoes Prelude. 🌿🎶✨ Come explore the realms of sound, light, and nature. Witness the *Dragonfly's flight* through enchanted worlds and experience the mystical magic of Echoes Prelude.",
+  },
+  {
+    id: 4,
+    title: "Pet Fed Delhi 2024",
+    tagline: "India's Biggest Pet Festival",
+    poster:
+      "https://b.zmtcdn.com/data/zomaland/e9cf728741addac51aed5ab3a2ad23361728970104.png",
+    video:
+      "https://b.zmtcdn.com/data/file_assets/7dc09dcb4b4e70f4adb836b623bef4911728970147.mp4",
+    dateOfEvent: "2024-12-14",
+    timeOfEvent: "11:00 AM onwards",
+    tags: ["pet", "dog"],
+    venue:
+      "509/5, Ma Anandmayee Marg, Govind Puri, Giri Nagar, NSIC Estate, Okhla Phase III, Okhla Industrial Estate, New Delhi",
+    status: "Available",
+    price: 699,
+    isAvailable: true,
+    popularity: 6,
+    about: `Delhi, brace yourselves because Pet Fed is Back and it's bigger, better, and greener than ever! 🎉 #PetFedIndiaisBack
+
+This year, we’re not just celebrating our return—we’re celebrating 10 incredible years of Pet Fed! 🥳
+
+Join us at NSIC Exhibition Ground on 14th & 15th December 2024 for two days of non-stop love and fun with your fur babies. 🐾
+
+Here’s what we’ve got lined up for you:
+- 3 Acres of Festival Bliss
+- Expert-Led Master Classes
+- Exciting Dog & Cat Play Zones
+- Dedicated Cat Zone
+- Fashion Show
+- Police Dog Show
+- Agility Ring
+- Adoption Camps
+- Tons of Games
+- 150+ Global Pet Stalls
+- Food, Drinks & Unmatched Fun
+
+Come with or without your pet—but don’t miss out on the decade celebration! 🎂
+#PetFedDelhi2024`,
+  },
 ];
 
 export const sortyByOptions = ["Date", "Price", "Popularity"];
@@ -72,9 +130,31 @@ export const filters = [
   },
   {
     id: 5,
-    name: "Sports",
+    name: "Sport",
     icon: "scoreboard",
     bgColor: "#F97316",
     borderColor: "border-purple-500",
+  },
+
+  {
+    id: 6,
+    name: "Cinema",
+    icon: "movie",
+    bgColor: "#F87171",
+    borderColor: "border-pink-500",
+  },
+  {
+    id: 7,
+    name: "Halloween",
+    icon: "skull",
+    bgColor: "#F59E0B",
+    borderColor: "border-yellow-500",
+  },
+  {
+    id: 8,
+    name: "Pet",
+    icon: "pets",
+    bgColor: "#10B981",
+    borderColor: "border-green-500",
   },
 ];

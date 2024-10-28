@@ -4,13 +4,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import Icon from "./Icon";
 import EventCard from "./EventCard";
-import { filters, sortyByOptions, events } from "../utils/data";
+import { filters, sortyByOptions } from "../utils/data";
+import { dateFormatting, getEvents } from "../utils/functions";
 
 export default function EventsListing() {
   const [isSortByOpen, setIsSortByOpen] = useState(false);
   const [sortBy, setSortBy] = useState("Date");
   const [activeFilter, setActiveFilter] = useState(null);
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const handleSortByOpen = () => {
     setIsSortByOpen(!isSortByOpen);
@@ -25,28 +27,41 @@ export default function EventsListing() {
     );
   };
 
-  useEffect(() => {
+  const fetchAndSortEvents = async () => {
+    const events = await getEvents();
+
     const filteredEvents = events.filter((event) => {
       if (!activeFilter) return true;
       return event.tags.includes(activeFilter);
     });
 
     if (sortBy === "Date") {
-      filteredEvents.sort((a, b) => {
-        return new Date(a.dateOfEvent) - new Date(b.dateOfEvent);
-      });
+      filteredEvents.sort(
+        (a, b) => new Date(a.dateOfEvent) - new Date(b.dateOfEvent)
+      );
     } else if (sortBy === "Price") {
-      filteredEvents.sort((a, b) => {
-        return a.price - b.price;
-      });
+      filteredEvents.sort((a, b) => a.price - b.price);
     } else if (sortBy === "Popularity") {
-      filteredEvents.sort((a, b) => {
-        return b.popularity - a.popularity;
-      });
+      filteredEvents.sort((a, b) => b.popularity - a.popularity);
     }
 
     setFilteredEvents(filteredEvents);
+  };
+
+  useEffect(() => {
+    fetchAndSortEvents();
   }, [activeFilter, sortBy]);
+
+  // Event Modal
+  const handleCardClick = (event) => {
+    setSelectedEvent(event);
+    document.body.style.overflow = "hidden";
+  };
+
+  const handleCloseModal = () => {
+    setSelectedEvent(null);
+    document.body.style.overflow = "auto";
+  };
 
   return (
     <section className="flex flex-col gap-5">
@@ -128,7 +143,14 @@ export default function EventsListing() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredEvents && filteredEvents.length > 0 ? (
           filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
+            <motion.button
+              key={event.id}
+              layoutId={event.id}
+              onClick={() => handleCardClick(event)}
+              className="relative text-left"
+            >
+              <EventCard event={event} />
+            </motion.button>
           ))
         ) : (
           <div>
@@ -136,6 +158,145 @@ export default function EventsListing() {
           </div>
         )}
       </div>
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedEvent && (
+          <>
+            {/* Background Blur */}
+            <motion.div
+              className="fixed inset-0 bg-black/50 backdrop-blur-xl z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }} // Smooth backdrop fade
+              onClick={handleCloseModal}
+            />
+
+            {/* Zoomed Card */}
+            <motion.div
+              layoutId={selectedEvent.id}
+              className="fixed top-0 left-0 right-0 mx-auto w-full max-w-md p-5 overflow-y-auto max-h-[100dvh] hide-scrollbar rounded-lg shadow-lg z-[999]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 20,
+              }}
+            >
+              {/* Close Button */}
+              <motion.button
+                onClick={handleCloseModal}
+                className="absolute top-5 right-5 text-zinc-300 bg-zinc-700 px-4 py-2 rounded-full text-sm"
+              >
+                Close
+              </motion.button>
+
+              <div className="w-full flex flex-col gap-2 mt-10">
+                <EventCard event={selectedEvent} showOverlay={false} />
+
+                {/* Information Container */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="p-4 rounded-2xl bg-white/30 shadow-lg flex flex-col gap-1"
+                >
+                  <h2 className="text-3xl font-bold font-anton">
+                    {selectedEvent.title}
+                  </h2>
+                  <p className="text-sm text-zinc-200">
+                    {selectedEvent?.tagline}
+                  </p>
+                </motion.div>
+
+                {/* Details */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="rounded-2xl bg-white/30 shadow-lg flex flex-col gap-2"
+                >
+                  <div className="flex gap-5 border-b border-zinc-400 p-4">
+                    <Icon name="event" className="text-3xl font-semibold" />
+                    <h2 className="text-3xl font-bold font-anton">
+                      {dateFormatting(selectedEvent?.dateOfEvent)}
+                    </h2>
+                  </div>
+                  <div className="flex gap-5 border-b border-zinc-400 p-4 pt-2">
+                    <Icon name="schedule" className="text-3xl font-semibold" />
+                    <h2 className="text-3xl font-bold font-anton">
+                      {selectedEvent.timeOfEvent}
+                    </h2>
+                  </div>
+                  <div className="flex gap-5 p-4 pt-2">
+                    <Icon
+                      name="location_on"
+                      className="text-3xl font-semibold"
+                    />
+                    <div className="flex flex-col gap-1">
+                      <h2 className="text-3xl font-bold font-anton">Venue</h2>
+                      <p className="text-sm text-zinc-200">
+                        {selectedEvent?.venue}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Book */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className={`p-4 rounded-2xl  shadow-lg flex flex-col gap-1 ${
+                    selectedEvent?.isAvailable
+                      ? "cursor-pointer bg-rose-500"
+                      : "cursor-not-allowed bg-zinc-400"
+                  }`}
+                >
+                  <div className="flex justify-between">
+                    {selectedEvent?.isAvailable && (
+                      <h2 className="text-3xl font-bold font-anton">
+                        <span className="text-[32px]">₹</span>
+                        <span>{selectedEvent?.price}</span>
+                      </h2>
+                    )}
+
+                    {selectedEvent?.isAvailable ? (
+                      <button className="text-3xl font-bold font-anton">
+                        Book Now
+                      </button>
+                    ) : (
+                      <button className="flex-1 text-3xl font-bold font-anton text-center">
+                        Sold Out
+                      </button>
+                    )}
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="p-4 rounded-2xl bg-white/30 shadow-lg flex flex-col gap-1"
+                >
+                  <h2 className="text-3xl font-bold font-anton">About</h2>
+                  <p className="text-sm text-zinc-200">
+                    {selectedEvent?.about}
+                  </p>
+                </motion.div>
+              </div>
+
+              {/* Information Container */}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
