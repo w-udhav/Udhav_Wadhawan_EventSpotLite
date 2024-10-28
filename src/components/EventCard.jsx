@@ -77,7 +77,7 @@ export default function EventCard({ event = {}, showOverlay = true }) {
 
       {/* overlay */}
       {showOverlay && (
-        <div className="absolute bottom-0 left-0 w-full h-20 backdrop-blur-xl flex justify-between items-center px-4">
+        <div className="absolute bottom-0 left-0 w-full h-20 backdrop-blur-xl flex justify-between items-center px-4 bg-gradient-to-b from-transparent to-black/50">
           <div className="flex flex-col gap-">
             <h3 className="text-md md:text-xl font-bold text-">
               {titleTrimited || "Event Title"}
@@ -87,7 +87,7 @@ export default function EventCard({ event = {}, showOverlay = true }) {
             </p>
           </div>
           <button className="min-w-max font-bold px-6 py-3 bg-zinc-700/60 rounded-full text-sm">
-            {!event.isAvailable ? "Book" : "Sold Out"}
+            {event?.isAvailable ? "Book" : "Sold Out"}
           </button>
         </div>
       )}

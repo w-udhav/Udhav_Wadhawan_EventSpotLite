@@ -95,6 +95,81 @@ Here’s what we’ve got lined up for you:
 Come with or without your pet—but don’t miss out on the decade celebration! 🎂
 #PetFedDelhi2024`,
   },
+  {
+    id: 5,
+    title: "National Museum: Mughal and Pahari Paintings",
+    tagline:
+      "Explore the artistic treasures of India's National Museum, showcasing Mughal and Pahari paintings. Book now for an enriching experience!",
+    poster:
+      "https://b.zmtcdn.com/data/zomaland/991cb7d2cb40c5f407e5e731dad0e47e1729162707.jpeg",
+    video: "",
+    dateOfEvent: "2024-11-09",
+    timeOfEvent: "4:00 PM - 5:30 PM",
+    tags: ["art", "museum", "history"],
+    venue:
+      "Janpath Rd, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011",
+    status: "Available",
+    price: 708,
+    isAvailable: true,
+    popularity: 2,
+    about: `Join us for a captivating Art Walk at the National Museum Delhi, exploring the rich heritage of Mughal and Pahari paintings. Immerse yourself in the vibrant colours, intricate details, and exquisite craftsmanship of these renowned art forms. As you wander through the galleries, we will narrate the stories behind each masterpiece, shedding light on the cultural, historical, and artistic significance of these iconic works. From the grandeur of Mughal courts to the ethereal charm of Pahari hills, this immersive experience will transport you to a bygone era and provide a deeper understanding of India's artistic legacy.`,
+  },
+  {
+    id: 6,
+    title: "Punchliners Comedy Show ft. Vipul Goyal",
+    tagline: "A Punchliners Comedy Show",
+    poster:
+      "https://b.zmtcdn.com/data/zomaland/253f4911b9269c43a2e7ec1252e83c151725853211.png",
+    video: "",
+    dateOfEvent: "2024-11-09",
+    timeOfEvent: "8:00 PM - 9:30 PM",
+    tags: ["comedy"],
+    venue: "Aerocity, Indira Gandhi International Airport, New Delhi",
+    status: "Available",
+    price: 699,
+    isAvailable: true,
+    popularity: 2,
+    about: `Join us for a captivating Art Walk at the National Museum Delhi, exploring the rich heritage of Mughal and Pahari paintings. Immerse yourself in the vibrant colours, intricate details, and exquisite craftsmanship of these renowned art forms. As you wander through the galleries, we will narrate the stories behind each masterpiece, shedding light on the cultural, historical, and artistic significance of these iconic works. From the grandeur of Mughal courts to the ethereal charm of Pahari hills, this immersive experience will transport you to a bygone era and provide a deeper understanding of India's artistic legacy.`,
+  },
+  {
+    id: 7,
+    title: "Legacy Rewind ft. Farhan Akhtar Live",
+    tagline: "#PourYourPassion",
+    poster:
+      "https://b.zmtcdn.com/data/zomaland/695a6120ffb6e3e5fcf57039a7b8042a1728549095.png",
+    video:
+      "https://b.zmtcdn.com/data/file_assets/e0b46039f1e52fa5fc3fa8c774c0a5bb1728550768.mp4",
+    dateOfEvent: "2024-11-16",
+    timeOfEvent: "5:00 PM - 10:00 PM",
+    tags: ["comedy"],
+    venue:
+      "No. 11, Entry from Gate, Entertainment City, adjacent The Great India Place Mall, Sector 38, Noida",
+    status: "Available",
+    price: 999,
+    isAvailable: true,
+    popularity: 1,
+    about:
+      "Get ready for an epic festival celebrating India's vibrant culture! Dive into music, mouthwatering food, fun games, and more. Experience the energy and diversity like never before!",
+  },
+  {
+    id: 8,
+    title: "Tribute to AC/DC & Guns N' Roses",
+    tagline: "by 2Blue",
+    poster:
+      "https://b.zmtcdn.com/data/zomaland/a699280e366f8415e0ee173cc4baa7251729656736.jpeg",
+    video: "",
+    dateOfEvent: "2024-12-07",
+    timeOfEvent: "9:00 PM - 11:00 PM",
+    tags: ["concert", "music", "rock"],
+    venue:
+      "No. 11, Entry from Gate, Entertainment City, adjacent The Great India Place Mall, Sector 38, Noida",
+    status: "Available",
+    price: 499,
+    isAvailable: true,
+    popularity: 8,
+    about:
+      "Lee & Hard Rock Cafe Presents The Ultimate Tribute to AC/DC & Guns N’ Roses ft. 2Blue. YOU WILL LOVE HIM! Because he is not just a great singer! Tirthankar Poddar (aka 2Blue) is a muscular statement like a raised fist! With his four-octave militant-like voice and provocative storytelling, he is known to dazzle. Small wonder when Paul Di`Anno of Iron Maiden and George Lynch of Dokken came to India, it was 2Blue they performed with. As did Bumblefoot of Guns N’ Roses.",
+  },
 ];
 
 export const sortyByOptions = ["Date", "Price", "Popularity"];

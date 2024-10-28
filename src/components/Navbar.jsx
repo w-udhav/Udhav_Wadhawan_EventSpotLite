@@ -12,9 +12,9 @@ export default function Navbar() {
         }
       >
         <div className="max-w-screen-xl w-full flex justify-between items-center z-20">
-          <div className="-ml-6">
+          <a href="/" className="-ml-6">
             <img src={logo} alt="EventSpot" className="w-32" />
-          </div>
+          </a>
           <div>
             <button className="min-w-max py-2 px-4 text-sm md:text-[17px] text-zinc-300 rounded-full flex justify-center items-center gap-2 relative bg-zinc-800 font-semibold border-2 border-zinc-600">
               Delhi NCR

@@ -16,9 +16,9 @@ function App() {
 
       <AppTemplate className="mt-10 md:mt-20">
         <div className="flex flex-col gap-20">
-          <section className="">
+          {/* <section className="">
             <SectionHeader title="For You" />
-          </section>
+          </section> */}
 
           <EventsListing />
         </div>
